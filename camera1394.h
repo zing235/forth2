@@ -47,15 +47,23 @@
 class Camera1394 : public QQuickPaintedItem
 {
     Q_OBJECT
-
+    Q_PROPERTY(quint32 CameraID READ getCameraID )
+    Q_PROPERTY(quint32 getimagewidth READ getimagewidth)
+    Q_PROPERTY(quint32 getimageheight READ getimageheight)
 public:
     Camera1394(QQuickItem *parent = 0);
+
+    quint32 getCameraID(void) const;
+    quint32 getimagewidth(void) const;
+    quint32 getimageheight(void) const;
+
     Q_INVOKABLE void startcamera();
     Q_INVOKABLE void updatecamera();
 
 
    void paint(QPainter *painter);
-
+private:
+   quint32 m_cameraID;
 
 
 };

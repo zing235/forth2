@@ -153,18 +153,27 @@ Rectangle
                       Camera1394 {
                         anchors.fill: parent
                         id: camera1394test
+//                        renderTarget: FramebufferObject
                         Timer{
                             id: cameratimer
-                            interval: 100;
+                            interval: 50;
                             repeat: true
                             onTriggered: {
                                 time.text = Date().toString()
                                 camera1394test.updatecamera()
                             }
                         }
+                        Timer{
+                            id: valuetimer
+                            interval: 30000;
+                            repeat: true
+                            onTriggered: {
+                                imagevalue.getImageValue();
+                            }
+                        }
                         Button {
                             id: button1
-                            text: "Startcamera"
+                            text: "StartCamera"
                             iconSource: qsTr("")
                             activeFocusOnPress: false
                             checked: false
@@ -175,6 +184,7 @@ Rectangle
                             onClicked:{
                                 camera1394test.startcamera()
                                 cameratimer.start()
+                                valuetimer.start()
                             }
 
                         }
@@ -191,27 +201,35 @@ Rectangle
                        }
                 }
                 Rectangle{
-                    id:sbcamera
+                    id:aucharacter
                     anchors.top:parent.top
                     anchors.left: aucamera.right
                     anchors.leftMargin: 10
                     anchors.right: parent.right
+                    anchors.bottom: parent.bottom
                     color: "gray"
-                    height: 185
-                    Column{
+                    Rectangle{
                         anchors.fill: parent
+                    Column{
+                        anchors.top: parent.top
+                        id:pinweiyuce
+                        width: parent.width
+                        height: 195
                         spacing: 5
+
+
+
                     Rectangle{
                         width: parent.width
-                        height: 30
+                        height: 45
                         color: "#000000"
                        Text{
                             id:pinwei
                             anchors.centerIn: parent
                             text: "原矿品位预测"
-                            font.pixelSize:30
+                            font.pixelSize:40
                             font.italic: true
-                            color: "#00FF00"
+                            color: "#00FFFF"
                         }
                     }
                     Row{
@@ -220,7 +238,7 @@ Rectangle
 
                     Rectangle{
                         width: parent.width/2-13
-                        height: 150
+                        height: 145
                         color: "#000000"
                        Text{
                             id:pinwei2
@@ -235,7 +253,7 @@ Rectangle
                     }
                     Rectangle{
                         width: parent.width/2+7
-                        height: 150
+                        height: 145
                         color: "#000000"
                         ListModel {
                             id: dummyModel
@@ -276,9 +294,119 @@ Rectangle
 
                     }
                     }
+
+}
+                    Rectangle{
+
+                        anchors.top:pinweiyuce.bottom
+                        width: parent.width
+                        height:18
+                        color: "#009090"
+                    }
+                    Column{
+                        anchors.top: pinweiyuce.bottom
+                        anchors.topMargin: 15
+                        anchors.bottom: parent.bottom
+                        width: parent.width
+                        spacing: 5
+
+                    Rectangle{
+
+                        width: parent.width
+                        height: 45
+                        color: "#000000"
+                       Text{
+                            anchors.centerIn: parent
+                            text: "泡沫特征"
+                            font.pixelSize:40
+                            font.italic: true
+                            color: "#00FFFF"
+                        }
+                    }
+                    Rectangle{
+                        id:tezheng1
+                        width: parent.width
+                        height: (parent.height-75)/6
+                        color: "#000000"
+                       Text{
+                            id:bubblesize
+                            anchors.centerIn: parent
+                            text: "泡沫大小: " +imagevalue.BubbleSize
+                            font.pixelSize:30
+                            font.italic: true
+                            color: "#00FF00"
+                        }
+                    }
+                    Rectangle{
+                        width: parent.width
+                        height: tezheng1.height
+                        color: "#000000"
+                       Text{
+                            id:bubblenumber
+                            anchors.centerIn: parent
+                            text: "泡沫个数: "+imagevalue.BubbleNumber
+                            font.pixelSize:30
+                            font.italic: true
+                            color: "#00FF00"
+                        }
+                    }
+                    Rectangle{
+                        width: parent.width
+                        height: tezheng1.height
+                        color: "#000000"
+                       Text{
+                            id:graymean
+                            anchors.centerIn: parent
+                            text: "泡沫颜色: "+imagevalue.GrayMean
+                            font.pixelSize:30
+                            font.italic: true
+                            color: "#00FF00"
+                        }
+                    }
+                    Rectangle{
+                        width: parent.width
+                        height: tezheng1.height
+                        color: "#000000"
+                       Text{
+                            id:bubblefangcha
+                            anchors.centerIn: parent
+                            text: "泡沫方差"
+                            font.pixelSize:30
+                            font.italic: true
+                            color: "#00FF00"
+                        }
+                    }
+                    Rectangle{
+                        width: parent.width
+                        height: tezheng1.height
+                        color: "#000000"
+                       Text{
+                            id:chengzailv
+                            anchors.centerIn: parent
+                            text: "承载率"
+                            font.pixelSize:30
+                            font.italic: true
+                            color: "#00FF00"
+                        }
+                    }
+                    Rectangle{
+                        width: parent.width
+                        height: tezheng1.height
+                        color: "#000000"
+                       Text{
+                            id:bubblerate
+                            anchors.centerIn: parent
+                            text: "泡沫速度"
+                            font.pixelSize:30
+                            font.italic: true
+                            color: "#00FF00"
+                        }
                     }
 
 
+                    }
+
+}
                 }
 
             }

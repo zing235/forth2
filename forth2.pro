@@ -27,7 +27,9 @@ QML_IMPORT_PATH =
 
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += main.cpp \
-    camera1394.cpp
+    camera1394.cpp \
+    Histogram.cpp \
+    ImageValue.cpp
 
 # Installation path
 # target.path =
@@ -37,4 +39,9 @@ include(qtquick2applicationviewer/qtquick2applicationviewer.pri)
 qtcAddDeployment()
 
 HEADERS += \
-    camera1394.h
+    camera1394.h \
+    Histogram.h \
+    ImageValue.h \
+    WaterShedAlgorithm.h \
+    WatershedPixel.h \
+    WatershedStructure.h

@@ -11,7 +11,7 @@ using namespace std;
 using namespace cv;
 UINT32_TYPE                 cnt(64);
 std::vector<UINT32_TYPE>    CamIds(cnt);
-
+UINT32_TYPE          imagewidth,imageheight;
 QImage cameraframe;
 
 #define UINT8P_CAST(x) reinterpret_cast<UINT8*>(x)
@@ -26,7 +26,7 @@ void Camera1394::startcamera(void)
 {
 
     UINT32_TYPE Result;
-    UINT32_TYPE imagewidth,imageheight,depth,Code;
+    UINT32_TYPE depth,Code;
 
     //1.initial the camera
     Result=UCC_Init();
@@ -42,6 +42,7 @@ void Camera1394::startcamera(void)
     {
         std::cout<<"Get Cameras failed"<<endl;
     }
+//    setCameraID(quint32::CamIds[0]);
 
 
     //3.OpenCamera(CamIds[0]);
@@ -76,12 +77,23 @@ void Camera1394::updatecamera(void)
     update();
 }
 
-//![1]
+
 void Camera1394::paint(QPainter *painter)
 {
     UCC_GetBitmapImage(CamIds[0],UINT8P_CAST(cameraframe.bits()),10);
     painter->drawImage(0,0,cameraframe);
-
 }
-//![1]
+
+quint32 Camera1394::getCameraID(void) const
+{
+    return CamIds[0];
+}
+quint32 Camera1394::getimagewidth(void) const
+{
+    return imagewidth;
+}
+quint32 Camera1394::getimageheight(void) const
+{
+    return imageheight;
+}
 
