@@ -1,20 +1,19 @@
 import QtQuick 2.2
 import "contents"
 import QtQuick.Controls 1.1
+import QtQuick.Dialogs 1.1
 
 Rectangle {
      id: page
      width: 1300; height: 690
-     color: "#00000000"
-
-     Image {
+     Rectangle {
          id: skinpic
          x: 0
          y: 0
          width: parent.width
          height: parent.height
-         fillMode: Image.TileHorizontally
-         source: "contents/background_mainwnd.jpg"
+
+         color: "#000"
 //         Text {
 //             id: title
 //             x: 10
@@ -34,18 +33,28 @@ Rectangle {
              y: 10;
              width:parent.width
              height:parent.height
-             color: "#000000"
          }
 
-         Image
-         {
+         AnimatedImage{
              id: logo
              anchors.right: parent.right
-             anchors.rightMargin: 20
+             anchors.rightMargin: 0
              anchors.top: parent.top
-             anchors.topMargin: 10
-             source: "contents/logo.png"
+             anchors.topMargin: 0
+             width: 200
+             height: 85
+             source: "contents/xinlonglogo.gif"
          }
+
+//         Image
+//         {
+//             id: logo
+//             anchors.right: parent.right
+//             anchors.rightMargin: 20
+//             anchors.top: parent.top
+//             anchors.topMargin: 10
+//             source: "contents/logo.png"
+//         }
 
      }
 }
