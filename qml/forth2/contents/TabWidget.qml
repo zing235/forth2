@@ -283,16 +283,74 @@ Rectangle
             Rectangle
             {
                 anchors.fill: parent
-                anchors.margins: 50
+                anchors.margins: 20
                 color:"#99FF0000"
-                Text
-                {
-                    font.pointSize: 50
-                    font.family: "微软雅黑"
-                    color:"#FFFFFF"
-                    anchors.centerIn: parent
-                    text:"十步杀一人"
+                Column{
+                    anchors.fill: parent
+                    spacing: 30
+                    Rectangle{
+                        width: parent.width/2
+                        height: parent.height/2-15
+                        color:"red"
+                        Camera1394 {
+                          anchors.fill: parent
+                          id: camera1394test11
+  //                        renderTarget: FramebufferObject
+                          Timer{
+                              id: cameratimer11
+                              interval: 50;
+                              repeat: true
+                              onTriggered: {
+                                  time11.text = Date().toString()
+                                  camera1394test11.updatecamera()
+                              }
+                          }
+                          Timer{
+                              id: valuetimer11
+                              interval: 30000;
+                              repeat: true
+                              onTriggered: {
+                                  imagevalue.getImageValue();
+                              }
+                          }
+                          Button {
+                              id: button11
+                              text: "StartCamera"
+                              iconSource: qsTr("")
+                              activeFocusOnPress: false
+                              checked: false
+                              anchors.left: parent.left
+                              anchors.leftMargin: 0
+                              anchors.top: parent.top
+                              anchors.topMargin: 0
+                              onClicked:{
+                                  camera1394test11.startcamera()
+                                  cameratimer11.start()
+                                  valuetimer11.start()
+                              }
+
+                          }
+                          Text {
+                              id: time11
+                              text: "time"
+                              anchors.right: parent.right
+                              anchors.rightMargin: 0
+                              anchors.top: parent.top
+                              anchors.topMargin: 0
+                              style: Text.Raised
+                              font.pointSize: 15
+                          }
+                         }
+
+                    }
+                    Rectangle{
+                        width: parent.width/2
+                        height: parent.height/2-15
+                        color: "blue"
+
+                    }
                 }
+
             }
         }
         MainWidget

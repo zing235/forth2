@@ -80,8 +80,9 @@ void Camera1394::updatecamera(void)
 
 void Camera1394::paint(QPainter *painter)
 {
+//    QRect camerarec(0,0,300,300);
     UCC_GetBitmapImage(CamIds[0],UINT8P_CAST(cameraframe.bits()),10);
-    painter->drawImage(0,0,cameraframe);
+    painter->drawImage(boundingRect().adjusted(1, 1, -1, -1),cameraframe);
 }
 
 quint32 Camera1394::getCameraID(void) const
